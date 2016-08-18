@@ -1,4 +1,92 @@
 Rails.application.routes.draw do
+  get '/' => 'users#new'
+
+  get '/events' => 'events#index'
+
+  post '/users' => 'users#create'
+
+  post '/sessions' => 'sessions#create'
+
+  post '/events' => 'events#create'
+
+  get '/events/:id' => 'events#show'
+
+  post '/comments' => 'comments#create'
+
+  post '/joins' => 'joins#create'
+
+  delete '/joins' => 'joins#destroy'
+
+  get 'joins/index'
+
+  get 'joins/new'
+
+  get 'joins/create'
+
+  get 'joins/show'
+
+  get 'joins/edit'
+
+  get 'joins/update'
+
+  get 'joins/destroy'
+
+  get 'sessions/index'
+
+  get 'sessions/new'
+
+  get 'sessions/create'
+
+  get 'sessions/show'
+
+  get 'sessions/edit'
+
+  get 'sessions/update'
+
+  get 'sessions/destroy'
+
+  get 'events/index'
+
+  get 'events/new'
+
+  get 'events/create'
+
+  get 'events/show'
+
+  get 'events/edit'
+
+  get 'events/update'
+
+  get 'events/destroy'
+
+  get 'comments/index'
+
+  get 'comments/new'
+
+  get 'comments/create'
+
+  get 'comments/show'
+
+  get 'comments/edit'
+
+  get 'comments/update'
+
+  get 'comments/destroy'
+
+  get 'users/index'
+
+  get 'users/new'
+
+  get 'users/create'
+
+  get 'users/show'
+
+  get 'users/edit'
+
+  get 'users/update'
+
+  get 'users/destroy'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

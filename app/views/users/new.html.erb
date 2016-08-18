@@ -1,0 +1,22 @@
+<h1>Welcome</h1>
+<form action = '/users' method = 'post'>
+	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+	First name: <input type = 'text' name = 'user[first_name]'>
+	Last name: <input type = 'text' name = 'user[last_name]'>
+	Enter an email: <input type = 'text' name = 'user[email]'>
+	Location: <input type = 'text' name = 'user[location]'>
+	State: <select name = 'user[state]'>
+		<% states_array.each do |s| %>
+			<option value = '<%= s %>'><%= s %></option>
+		<% end %>
+	</select>
+	Enter a password: <input type = 'text' name = 'user[password]'>
+	Confirm your password: <input type = 'text' name = 'user[password_confirmation]'>
+	<input type = 'submit' value = 'Register'>
+</form>
+<form action = '/sessions' method = 'post'>
+	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+	Enter an email: <input type = 'text' name = 'user[email]'>
+	Enter a password: <input type = 'text' name = 'user[password]'>
+	<input type = 'submit' value = 'Login'>
+</form>

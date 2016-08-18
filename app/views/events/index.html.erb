@@ -1,0 +1,55 @@
+<h2>Hello, <%= current_user.first_name %>! </h2>
+<table>
+	<tr>
+		<td>Event name</td>
+		<td>Event location</td>
+		<td>Event date</td>
+		<td>Action/Status</td>
+	</tr>
+		<% @events.each do |e| %>
+		<tr>
+			<td><a href = '/events/<%= e.id %>'><%= e.name %></a></td>
+			<td><%= e.location %>, <%= e.state %></td>
+			<td><%= e.date %></td>
+			<td>
+				<% if Event.has_created(e.id, current_user.id) %>
+					<a href = '/events/<%= e.id %>/edit'>Edit</a>
+					<form action = '/events' method = 'post'>
+						<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+						<input type = 'hidden' name = '_method' value = 'delete'>
+						<input type = 'hidden' name = 'event_id' value = '<%= e.id %>'>
+						<input type = 'submit' value = 'Delete'>
+					</form>
+				<% elsif Join.has_joined(e.id, current_user.id) %>
+					Joining...
+					<form action = '/joins' method = 'post'>
+						<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+						<input type = 'hidden' name = '_method' value = 'delete'>
+						<input type = 'hidden' name = 'event_id' value = '<%= e.id %>'>
+						<input type = 'submit' value = 'Cancel'>
+					</form>
+				<% else %>
+					<form action = '/joins' method = 'post'>
+						<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+						<input type = 'hidden' name = 'event_id' value = '<%= e.id %>'>
+						<input type = 'submit' value = 'Join'>
+					</form>
+				<% end %>
+		</tr>
+		<% end %>
+</table>
+<h3>Create a new event</h3>
+<form action = '/events' method = 'post'>
+	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+	<input type = 'hidden' name = 'event[user_id]' value = '<%= current_user.id %>'>
+	Name: <input type = 'text' name = 'event[name]'>
+	Date: <input type = 'date' name = 'event[date]'>
+	Location: <input type = 'text' name = 'event[location]'>
+	State: <select name = 'event[state]'>
+		<% states_array.each do |s| %>
+			<option value = '<%= s %>'><%= s %></option>
+		<% end %>
+	</select>
+	<input type = 'submit' value = 'Create Event'>
+</form>
+	
